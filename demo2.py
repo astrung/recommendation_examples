@@ -73,6 +73,7 @@ print("Test reciprocal rank: %.2f" % reciprocal_rank(model, test_interactions, t
                                                      item_features=items_features).mean())
 
 def get_predict(user, model, list_item):
+    print("=========================")
     print("User %d" % user)
     scores = model.predict(user - 1, list_item, item_features=items_features, user_features=users_features)
     print("Liked items from history:")
@@ -85,6 +86,7 @@ def get_predict(user, model, list_item):
     predict_result = np.argsort(-scores) + 1
     removed_known_results = np.setdiff1d(predict_result, known_result)
     print(removed_known_results[:7])
+    print("=========================")
 
 for user in np.random.choice(test[3], 5).tolist():
     get_predict(user, model, np.arange(18))
